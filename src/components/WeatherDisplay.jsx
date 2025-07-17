@@ -18,7 +18,7 @@ const WeatherDisplay = () => {
       <div className="weather-display">
         <div className="loading">
           <div className="loading-spinner"></div>
-          <p>Wetterdaten werden geladen...</p>
+          <p>Loading weather data...</p>
         </div>
       </div>
     );
@@ -28,7 +28,7 @@ const WeatherDisplay = () => {
     return (
       <div className="weather-display">
         <div className="error">
-          <p>Fehler: {state.error}</p>
+          <p>Error: {state.error}</p>
         </div>
       </div>
     );
@@ -39,7 +39,7 @@ const WeatherDisplay = () => {
   }
 
   const weather = state.weather;
-  const condition = weatherCode[weather.weathercode] || 'Unbekannt';
+  const condition = weatherCode[weather.weathercode] || 'Unknown';
   const conditionParts = condition.split(' ');
   const emoji = conditionParts[0];
   const description = conditionParts.slice(1).join(' ');
@@ -61,28 +61,28 @@ const WeatherDisplay = () => {
               {convertTemp(weather.temperature_2m)}°{state.units[state.unit]}
             </h1>
             <p className="feels-like">
-              Gefühlt wie {convertTemp(weather.apparent_temperature)}°{state.units[state.unit]}
+              Feels like {convertTemp(weather.apparent_temperature)}°{state.units[state.unit]}
             </p>
           </div>
 
           <div className="weather-details">
             <div className="detail-item">
-              <div className="detail-label">Luftfeuchtigkeit</div>
+              <div className="detail-label">Humidity</div>
               <div className="detail-value">{weather.relative_humidity_2m}%</div>
             </div>
             
             <div className="detail-item">
-              <div className="detail-label">Luftdruck</div>
+              <div className="detail-label">Pressure</div>
               <div className="detail-value">{weather.surface_pressure} hPa</div>
             </div>
             
             <div className="detail-item">
-              <div className="detail-label">Sichtweite</div>
+              <div className="detail-label">Visibility</div>
               <div className="detail-value">{(weather.visibility / 1000).toFixed(1)} km</div>
             </div>
             
             <div className="detail-item">
-              <div className="detail-label">UV-Index</div>
+              <div className="detail-label">UV Index</div>
               <div className="detail-value">{weather.uv_index}</div>
             </div>
           </div>
@@ -91,7 +91,7 @@ const WeatherDisplay = () => {
             <h3 className="wind-title">Wind</h3>
             <div className="wind-details">
               <span className="wind-speed">{weather.wind_speed_10m} km/h</span>
-              <span className="wind-direction">aus {weather.wind_direction_10m}°</span>
+              <span className="wind-direction">from {weather.wind_direction_10m}°</span>
             </div>
           </div>
         </div>

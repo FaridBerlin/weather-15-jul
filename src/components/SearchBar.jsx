@@ -12,39 +12,39 @@ const SearchBar = () => {
     
     if (!location.trim()) return;
     
-    console.log('Suche nach Ort:', location);
+    console.log('Searching for location:', location);
     
-    // Dispatch-Funktion mit SET_LOADING Action aufrufen
+    // Dispatch function with SET_LOADING Action call
     dispatch({ type: 'SET_LOADING' });
     
     try {
-      // Fetch auf die Geocoding API
+      // Fetch to the Geocoding API
       const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${location}`);
       const data = await response.json();
       
-      // Überprüfen ob eine Stadt gefunden wurde
+      // Check if a city was found
       if (!data.results || data.results.length === 0) {
-        throw new Error('Stadt wurde nicht gefunden');
+        throw new Error('City not found');
       }
       
-      // Eigenschaften aus dem ersten Fetch extrahieren
+      // Extract properties from the first fetch
       const { latitude, longitude, name } = data.results[0];
       
-      // Stadt-Name als SET_CITY Action senden
+      // Send city name as SET_CITY Action
       dispatch({ 
         type: 'SET_CITY', 
         payload: name 
       });
       
-      // Zweiter Fetch für Wetterdaten mit den richtigen Parametern
+      // Second fetch for weather data with the correct parameters
       const weatherResponse = await fetch(
         `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,surface_pressure,wind_speed_10m,wind_direction_10m,visibility,uv_index&timezone=auto`
       );
       const weatherData = await weatherResponse.json();
       
-      console.log('Wetterdaten erhalten:', weatherData);
+      console.log('Weather data received:', weatherData);
       
-      // Die current-Daten extrahieren und in einem passenden Format speichern
+      // Extract current data and store in a suitable format
       const processedWeather = {
         temperature_2m: weatherData.current.temperature_2m,
         apparent_temperature: weatherData.current.apparent_temperature,
@@ -57,14 +57,14 @@ const SearchBar = () => {
         weathercode: weatherData.current.weather_code
       };
       
-      // Wetterdaten als SET_WEATHER Action senden
+      // Send weather data as SET_WEATHER Action
       dispatch({ 
         type: 'SET_WEATHER', 
         payload: processedWeather 
       });
       
     } catch (error) {
-      // Fehler im catch-Block abfangen und dispatch aufrufen
+      // Catch error in catch block and call dispatch
       dispatch({ 
         type: 'SET_ERROR', 
         payload: error.message 
@@ -76,13 +76,13 @@ const SearchBar = () => {
     <div className="search-bar">
       <form onSubmit={handleSearch} className="search-form">
         <div className="search-input-container">
-          <label htmlFor={inputId} className="search-label">Standort suchen:</label>
+          <label htmlFor={inputId} className="search-label">Search location:</label>
           <input
             id={inputId}
             type="text"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            placeholder="Ort eingeben..."
+            placeholder="Enter location..."
             className="search-input"
             disabled={state.loading}
           />
@@ -91,13 +91,13 @@ const SearchBar = () => {
             className="search-button"
             disabled={state.loading || !location.trim()}
           >
-            {state.loading ? 'Suchen...' : 'Suchen'}
+            {state.loading ? 'Searching...' : 'Search'}
           </button>
         </div>
       </form>
       
       <div className="search-suggestions">
-        <span className="suggestions-label">Beliebte Städte:</span>
+        <span className="suggestions-label">Popular Cities:</span>
         <button 
           onClick={() => setLocation('Berlin')}
           className="suggestion-btn"

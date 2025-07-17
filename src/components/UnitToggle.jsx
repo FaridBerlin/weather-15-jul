@@ -15,7 +15,7 @@ const UnitToggle = () => {
         onClick={handleToggleUnits}
         type="button"
       >
-        Anzeigen in {state.unit === 'celsius' ? '°F' : '°C'}
+        Display in {state.unit === 'celsius' ? '°F' : '°C'}
       </button>
     </div>
   );

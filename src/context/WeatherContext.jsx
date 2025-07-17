@@ -50,12 +50,12 @@ const weatherReducer = (state, action) => {
   }
 };
 
-// Context erstellen
+// Create Context
 const WeatherContext = createContext();
 
-// Provider-Komponente
+// Provider Component
 export const WeatherProvider = ({ children }) => {
-  // useReducer mit initialState
+  // useReducer with initialState
   const [state, dispatch] = useReducer(weatherReducer, initialState);
 
   return (
@@ -65,11 +65,11 @@ export const WeatherProvider = ({ children }) => {
   );
 };
 
-// Custom Hook für einfachere Verwendung
+// Custom Hook for easier usage
 export const useWeather = () => {
   const context = useContext(WeatherContext);
   if (!context) {
-    throw new Error('useWeather muss innerhalb eines WeatherProvider verwendet werden');
+    throw new Error('useWeather must be used within a WeatherProvider');
   }
   return context;
 };
