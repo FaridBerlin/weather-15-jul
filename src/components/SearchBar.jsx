@@ -106,25 +106,25 @@ const SearchBar = () => {
           Berlin
         </button>
         <button 
-          onClick={() => setLocation('München')}
+          onClick={() => setLocation('Tokyo')}
           className="suggestion-btn"
           disabled={state.loading}
         >
-          München
+          Tokyo
         </button>
         <button 
-          onClick={() => setLocation('Hamburg')}
+          onClick={() => setLocation('Las Palmas')}
           className="suggestion-btn"
           disabled={state.loading}
         >
-          Hamburg
+          Las Palmas
         </button>
         <button 
-          onClick={() => setLocation('Köln')}
+          onClick={() => setLocation('Stockholm')}
           className="suggestion-btn"
           disabled={state.loading}
         >
-          Köln
+          Stockholm
         </button>
       </div>
     </div>

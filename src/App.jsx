@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1 className="app-title">🌤️ Wetter App</h1>
+        <h1 className="app-title">🌤️Farid Wetter App</h1>
         <p className="app-subtitle">Lokale Wetterinformationen in Echtzeit</p>
       </header>
       
